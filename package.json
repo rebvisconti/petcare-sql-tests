@@ -1,0 +1,19 @@
+{
+  "name": "petcare-sql-tests",
+  "version": "1.0.0",
+  "description": "Suíte de testes Playwright para PetCare SQL QA — API + SQL",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:api": "playwright test --project=\"API Tests\"",
+    "test:sql": "playwright test --project=\"SQL Tests\"",
+    "test:e2e": "playwright test --project=\"E2E Tests\"",
+    "test:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.44.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.4.3"
+  }
+}
