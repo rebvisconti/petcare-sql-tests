@@ -3,7 +3,7 @@
 ![Testing](https://img.shields.io/badge/Tests-30%20Total-success?style=for-the-badge)
 ![Coverage](https://img.shields.io/badge/Type-API%20%7C%20SQL%20%7C%20E2E-blue?style=for-the-badge)
 
-Suíte de testes **Playwright** para o projeto [PetCare SQL QA](../petcare-sql-qa) — cobrindo API REST e validação direta no banco de dados SQLite.
+Suíte de testes **Playwright** para o projeto [PetCare SQL QA](https://github.com/rebvisconti/petcare-sql-qa) — cobrindo API REST e validação direta no banco de dados SQLite.
 
 ---
 
@@ -81,19 +81,19 @@ npm run test:report
 
 ```
 petcare-sql-tests/
-| 📁support/
+├── 📁support/
 │   ├── api-client.js                   
 │   └── db-helper.js  
 │   └── data-factory.js
 │   └── index.js        
-├── tests/
-│   ├── api/
+├── 📁tests/
+│   ├── 📁api/
 │   │   ├── auth.spec.js                
 │   │   ├── agendamentos.spec.js        
 │   │   └── pets-e-estatisticas.spec.js 
-│   ├── sql/
+│   ├── 📁sql/
 │   │   └── validacao-sql.spec.js       
-│   └── e2e/
+│   └── 📁e2e/
 │       └── fluxos-completos.spec.js               
 ├── playwright.config.js
 ├── package.json
