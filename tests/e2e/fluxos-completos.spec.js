@@ -73,8 +73,8 @@ test.describe('CT-E2E — Fluxos Completos (API + SQL)', () => {
 
   test('CT-E2E-002 | Pet reutilizado em múltiplos agendamentos', async ({ request }) => {
 
-    const nomePet = 'PetRecorrente';
-    const tutor = 'Tutor Recorrente';
+    const nomePet = `PetRecorrente_${Date.now()}`;
+    const tutor = `TutorRecorrente_${Date.now()}`;
 
     await test.step('Criar dois agendamentos para o mesmo pet', async () => {
       await criarAgendamento(request, {
@@ -92,12 +92,15 @@ test.describe('CT-E2E — Fluxos Completos (API + SQL)', () => {
       });
     });
 
-    await test.step('Validar pet no banco', async () => {
-      const pets = DB.contarPets();
+    await test.step('Garantir sincronização da API', async () => {
+      // força consistência entre API e DB (evita race condition)
+      const res = await request.get(`${BASE_URL}/agendamentos`);
+      expect(res.status()).toBe(200);
+    });
 
+    await test.step('Validar pet no banco', async () => {
       const petNoBanco = DB.buscarPetPorNomeETutor(nomePet, tutor);
 
-      expect(pets).toBeGreaterThan(0);
       expect(petNoBanco).not.toBeNull();
     });
 
@@ -112,7 +115,6 @@ test.describe('CT-E2E — Fluxos Completos (API + SQL)', () => {
       expect(petIds.length).toBe(1);
     });
   });
-
   test('CT-E2E-003 | Fluxo de autenticação + operação protegida', async ({ request }) => {
 
     await test.step('Login válido retorna 200', async () => {
